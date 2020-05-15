@@ -5,10 +5,19 @@ it('can be created empty', () => expect(proxyMerged([])).toBeTruthy())
 it('reading, object works', () => {
   const s = proxyMerged([{ x: { y: 1 } }, {}])
   expect(typeof s.x).toEqual('object')
+  expect(s.x).toEqual({ y: 1 })
   expect(s.x.y).toEqual(1)
 })
 
-it('shallow merges objects together', () => {
+it('merges objects', () => {
+  const s = proxyMerged([{ x: { y: 1 } }, { x: { z: 2 } }])
+  expect(typeof s.x).toEqual('object')
+  expect(s.x).toEqual({ y: 1, z: 2 })
+  expect(s.x.y).toEqual(1)
+  expect(s.x.z).toEqual(2)
+})
+
+it('shallow merges values together', () => {
   const s = proxyMerged([{ a: 'hi' }, { a: { b: 10 } }])
   expect(s.a).toEqual('hi')
 })
@@ -62,4 +71,14 @@ it('behaves as it should in "in" expressions', () => {
   expect('a' in s).toEqual(true)
   expect('b' in s).toEqual(true)
   expect('c' in s).toEqual(false)
+})
+
+// TODO: figure out how to handle this
+it.skip('can handle frozen sources', () => {
+  const a = Object.freeze({ a: 'A' })
+  const b = { b: 'B' }
+  const s = proxyMerged([a, b])
+  expect(s.a).toEqual('A')
+  expect(s.b).toEqual('B')
+  expect(Object.keys(s)).toEqual(['a', 'b'])
 })
