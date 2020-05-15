@@ -1,10 +1,13 @@
 {
   "name": "proxy-merged",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A library for making many objects behave as one using proxies.",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "rollup -c",
