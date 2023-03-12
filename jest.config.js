@@ -1,4 +1,4 @@
-module.exports = {
-  preset: 'ts-jest',
-  collectCoverageFrom: ['src/*.ts', 'src/**/*.ts']
+export default {
+  preset: "ts-jest",
+  collectCoverageFrom: ["src/*.ts", "src/**/*.ts"],
 };
